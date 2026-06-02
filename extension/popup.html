@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+    body { width: 300px; background: #0f0f1a; color: #e0e0ff; padding: 16px; }
+    h2 { color: #c084fc; font-size: 1rem; margin-bottom: 12px; }
+    .info-box { background: #1a1a30; border-radius: 8px; padding: 10px; margin-bottom: 12px; font-size: 0.8rem; }
+    .info-box span { color: #a0a0cc; }
+    .info-box strong { color: #e0e0ff; display: block; margin-top: 2px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; margin-bottom: 8px; }
+    .mangadex { background: #ff6740; color: white; }
+    .novelupdates { background: #4a9eff; color: white; }
+    .comix { background: #4ade80; color: #0a0a0a; }
+    .unknown { background: #555; color: white; }
+    button { width: 100%; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: all 0.2s; }
+    #addBtn { background: #c084fc; color: #0f0f1a; }
+    #addBtn:hover { background: #d8b4fe; }
+    #addBtn:disabled { background: #444; color: #888; cursor: not-allowed; }
+    #status { margin-top: 10px; text-align: center; font-size: 0.78rem; min-height: 20px; }
+    .success { color: #4ade80; }
+    .error { color: #f87171; }
+    .warning { color: #fbbf24; }
+    .not-supported { text-align: center; color: #a0a0cc; font-size: 0.82rem; padding: 20px 0; }
+  </style>
+</head>
+<body>
+  <h2>📚 Novel Tracker Bot</h2>
+  <div id="content">
+    <div class="not-supported">Abre una página de<br>NovelUpdates, MangaDex o Comix.to</div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Novel Tracker — Add to Bot",
+  "version": "1.0",
+  "description": "Agrega novelas de NovelUpdates, MangaDex o Comix.to a tu tracker bot",
+  "permissions": ["activeTab", "scripting", "storage", "cookies"],
+  "host_permissions": [
+    "*://*.novelupdates.com/*",
+    "*://*.mangadex.org/*",
+    "*://*.comix.to/*",
+    "http://localhost/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.novelupdates.com/series/*",
+        "*://*.mangadex.org/title/*",
+        "*://*.comix.to/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "noveltracker-bot@local"
+    }
+  }
+}
