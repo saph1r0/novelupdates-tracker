@@ -1,0 +1,5 @@
+.env
+nu_cookies.json
+seen_chapters.json
+__pycache__/
+*.pyc

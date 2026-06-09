@@ -1,0 +1,26 @@
+name: Novel Chapter Tracker
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # cada 2 horas
+  workflow_dispatch:         # también se puede correr manual
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
+      - name: Run tracker
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python main.py --once  # ← flag para que no loop infinito
