@@ -7,7 +7,7 @@ import time
 
 # 💡 IMPORTANTE: Asegúrate de que estos nombres coincidan con tus archivos de funciones
 from tracker import check_new_chapters
-from bot import notify_new_chapters  # Cambia esto si tu función de enviar mensajes se llama diferente
+from bot import notify_new_chapters
 
 app = Flask(__name__)
 CORS(app)  # permite requests desde la extensión
@@ -26,7 +26,7 @@ def save_novels(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 # ─── RUTA HOME PARA QUE RENDER SEPA QUE EL SERVIDOR ESTÁ VIVO ───
-@app.route("/", methods=["GET"])
+@app.route("/")
 def home():
     return "¡Bot Tracker funcionando en la nube de forma gratuita! 🤖"
 
@@ -70,13 +70,13 @@ def list_novels():
 
 # ─── 🚀 EL BUCLE DEL BOT QUE ANTES ESTABA EN MAIN.PY ───
 def bot_loop():
-    print("🤖 Bucle del Bot iniciado en segundo plano...")
+    print("🤖 Bucle del Bot iniciado en segundo plano...", flush=True)
     # Le damos 10 segundos de cortesía al servidor para que termine de arrancar bien
     time.sleep(10) 
     
     while True:
         try:
-            print("\n🔍 Chequeando capítulos nuevos desde la nube...")
+            print("\n🔍 Chequeando capítulos nuevos desde la nube...", flush=True)
             data = load_novels()
             
             # Pasamos la lista de novelas a tu función del tracker original
@@ -86,13 +86,13 @@ def bot_loop():
             for ch in new_chapters:
                 # Modifica este formato a tu gusto
                 message = f"📚 *{ch['title']}*\n✨ NUEVO: {ch['chapter']}\n🔗 [Leer ahora]({ch['url']})"
-                send_telegram_notification(message)
+                notify_new_chapters(message)
                 
         except Exception as e:
             print(f"❌ Error en el bucle del bot: {e}")
         
         # Espera 2 horas (7200 segundos) antes de volver a escanear
-        print("🤖 Esperando 2 horas para el siguiente chequeo...")
+        print("🤖 Esperando 2 horas para el siguiente chequeo...", flush=True)
         time.sleep(7200)
 
 # Lanzamos el bot en un hilo secundario (Background Thread) para que no bloquee a Flask
