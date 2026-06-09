@@ -68,30 +68,24 @@ def list_novels():
     data = load_novels()
     return jsonify(data)
 
-# ─── 🚀 EL BUCLE DEL BOT QUE ANTES ESTABA EN MAIN.PY ───
 def bot_loop():
     print("🤖 Bucle del Bot iniciado en segundo plano...", flush=True)
-    # Le damos 10 segundos de cortesía al servidor para que termine de arrancar bien
-    time.sleep(10) 
+    time.sleep(10) # Cortesía al servidor
     
     while True:
         try:
             print("\n🔍 Chequeando capítulos nuevos desde la nube...", flush=True)
             data = load_novels()
             
-            # Pasamos la lista de novelas a tu función del tracker original
+            # 1. Tu tracker busca si hay novedades
             new_chapters = check_new_chapters(data["novels"])
             
-            # Si encuentra capítulos nuevos, envía las alertas a Telegram
-            for ch in new_chapters:
-                # Modifica este formato a tu gusto
-                message = f"📚 *{ch['title']}*\n✨ NUEVO: {ch['chapter']}\n🔗 [Leer ahora]({ch['url']})"
-                notify_new_chapters(message)
+            # 2. Le pasamos la lista DIRECTAMENTE a tu función original del bot
+            notify_new_chapters(new_chapters)
                 
         except Exception as e:
-            print(f"❌ Error en el bucle del bot: {e}")
+            print(f"❌ Error en el bucle del bot: {e}", flush=True)
         
-        # Espera 2 horas (7200 segundos) antes de volver a escanear
         print("🤖 Esperando 2 horas para el siguiente chequeo...", flush=True)
         time.sleep(7200)
 
