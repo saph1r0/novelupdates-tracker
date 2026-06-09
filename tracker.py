@@ -75,7 +75,8 @@ def get_chapter_novelupdates(slug):
         res = requests.get(
             f"https://www.novelupdates.com/series/{slug}/",
             headers=headers,
-            timeout=15
+            timeout=15,
+            verify=False
         )
         
         print(f"  NU status: {res.status_code} | {len(res.text)} bytes")
