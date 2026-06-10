@@ -31,10 +31,12 @@ def notify_new_chapters(new_chapters):
     
     for item in new_chapters:
         message = (
-            f"📖 *Nuevo capítulo disponible!*\n\n"
-            f"*{item['title']}*\n"
-            f" {item['chapter']}\n\n"
-            f"🔗 [Leer ahora]({item['url']})"
+            f"📖 <b>Nuevo capítulo disponible!</b>\n\n"
+            f"<b>{item['title']}</b>\n"
+            f"<blockquote>"
+            f"📢 {item['chapter']}"
+            f"</blockquote>\n"
+            f"{item['url']}"  
         )
         success = send_telegram_message(TELEGRAM_TOKEN, CHAT_ID, message)
         if success:
